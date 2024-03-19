@@ -29,12 +29,16 @@ export class Checkout implements ICheckout {
     }, {} as Record<string, number>);
 
     for (const [sku, quantity] of Object.entries(cartSummary)) {
-      const product = this.cart.filter(product => product.sku === sku);
+      const product = this.cart.find(product => product.sku === sku);
       const rule = this.rules.find(rule => rule.sku === sku);
-      if (!product.length || !rule) continue;
+      if (!product) continue;
 
-      const strategy = DiscountStrategyFactory.getStrategy(rule.discountType);
-      total += strategy.applyDiscount(product, quantity, rule);
+      if (rule) {
+        const strategy = DiscountStrategyFactory.getStrategy(rule.discountType);
+        total += strategy.applyDiscount(product, quantity, rule);
+      } else {
+        total += product.price * quantity;
+      }
     }
 
     return total;

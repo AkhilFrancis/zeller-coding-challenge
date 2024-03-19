@@ -3,7 +3,7 @@ import { Product } from "../types/product";
 import { DiscountStrategy } from "./interface/discountStrategyInterface";
 
 export class BulkDiscountStrategy implements DiscountStrategy {
-  applyDiscount(products: Product[], quantity: number, rule: PricingRule): number {
-    return quantity > rule.threshold ? rule.discountValue * quantity : products[0].price * quantity;
+  applyDiscount(product: Product, quantity: number, rule: PricingRule): number {
+    return quantity > rule.threshold ? rule.discountValue * quantity : product.price * quantity;
   }
 }
