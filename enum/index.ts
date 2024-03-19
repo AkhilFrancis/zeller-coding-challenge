@@ -1,0 +1,4 @@
+export enum DISCOUNT_TYPE {
+   BULK_DISCOUNT = 'BULK_DISCOUNT',
+   X_FOR_Y_DEAL = 'X_FOR_Y_DEAL'
+}
